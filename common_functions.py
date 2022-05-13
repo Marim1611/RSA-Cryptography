@@ -3,8 +3,6 @@ def listToString(s):
         str1 = "" 
         # traverse in the string  
         for ele in s: 
-            print("gg")
-            print(ele)
             str1 += ele  
         
         # return string  
@@ -13,7 +11,6 @@ def listToString(s):
 def isPrime(num):  
     # If given number is greater than 1
     if num > 1:
-
         # Iterate from 2 to n / 2
         for i in range(2, int(num/2)+1):
 
