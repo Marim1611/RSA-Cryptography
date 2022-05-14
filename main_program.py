@@ -26,12 +26,14 @@ my_receiver.e=e
 my_sender.set_public_key(p,q,e)
 # read the message & send it to the sender to encrypt it
 message="Marioma KEEP GOING ! <3 133"
+print("*******original message *********")
+print(message)
 cipher_text= my_sender.encrypt(message)
-print("****************")
+print("*******cipher text *********")
 print(cipher_text)
 # send the cipher text to the receiver 
 decrypted_message= my_receiver.decrypt(cipher_text)
-print("**** the end****")
+print("*******decrypted message *********")
 print(decrypted_message)
 
 

@@ -26,23 +26,15 @@ class Sender:
     def encrypt(self,message):
         message_list =list(message)
         cipher_text_list= []
-        #print(message_list)
-        print("m to be a nunmber")
         for character in message_list:
             # map each character to a number to apply RSA encryption
             character=ord(character) 
-            print(character)
             # encrypt each character and store it
             cipher_text_list.append(self.encrypt_char(int(character)))
-        #convert list to string "the final cipher text"
-        print(" sender msg list")
-        print(message_list) 
-        print(cipher_text_list)    
+        #convert list to string "the final cipher text"   
         for i in range (0,len(cipher_text_list)):
             cipher_text_list[i]= chr(cipher_text_list[i])
-        #print(cipher_text_list) 
-        cipher_text =cf.listToString(cipher_text_list)
-        #print(cipher_text)  
+        cipher_text =cf.listToString(cipher_text_list) 
         return cipher_text 
             
          
