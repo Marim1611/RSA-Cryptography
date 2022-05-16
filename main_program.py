@@ -15,22 +15,19 @@ i =0
 encryption_time=[]
 key_length=[]
 while i < len(lines)-1:
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@ ")
     # read the message and the public key
     p=int(lines[i])
     q=int(lines[i+1])
-    e=int(lines[i+2])
-    message=lines[i+3]
-    i+=4
+    message=lines[i+2]
     print("----------- original message --------------")
     print(message)
+    e= cf.generate_e( (p-1) * (q-1))
+    i+=3
     # check that p and q are primes
-    if not(cf.isPrime(p) and cf.isPrime(q)):
-        print(" p and q must be primes")
-        exit()
-    #check that phi(n) and e are co-primes
-    # if not(cf.areCoprime((p-1)*(q-1) ,e)):
-    #     print(" e and phi of n are not co-prime")
-    #     exit()    
+    # if not(cf.isPrime(p) and cf.isPrime(q)):
+    #     print(" p and q must be primes")
+    #     exit()
     #set values of the public key
     my_receiver.p=p
     my_receiver.q=q
@@ -61,5 +58,5 @@ plt.xlabel('encryption time')
 plt.ylabel('key length in bits')
 # # giving a title to my graph
 # plt.title('My first graph!')
-plt.show()
+#plt.show()
  
