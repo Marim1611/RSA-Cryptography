@@ -9,22 +9,23 @@ def listToString(s):
         # return string  
         return str1 
 # Python program to check if given number is prime or not
-def isPrime(num):  
-    # If given number is greater than 1
-    if num > 1:
-        # Iterate from 2 to n / 2
-        for i in range(2, int(num/2)+1):
+def isPrime(n):     return n > 1 and all(n % i for i in range(2, int(n ** 0.5) + 1))
+# def isPrime(num):  
+#     # If given number is greater than 1
+#     if num > 1:
+#         # Iterate from 2 to n / 2
+#         for i in range(2, int(num**0.5)+1):
 
-            # If num is divisible by any number between
-            # 2 and n / 2, it is not prime
-            if (num % i) == 0:
-                return False
-                break
-        else:
-            return True
+#             # If num is divisible by any number between
+#             # 2 and n / 2, it is not prime
+#             if (num % i) == 0:
+#                 return False
+#                 break
+#         else:
+#             return True
 
-    else:
-        return False
+#     else:
+#         return False
 def gcd(a, b):
     if b == 0:
         return a
