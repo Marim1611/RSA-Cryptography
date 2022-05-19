@@ -28,40 +28,46 @@ def CCA(C, n, e):
     return recovered
 
 
+# ---------------- read pq from txt file and generate c,n,e in another file
+def tests_txt(pq_file,attack_tests):
+    Bob_data = open(pq_file+".txt", "r")
+    lines = Bob_data.read().splitlines()
+    i =0
+    while i < len(lines)-1:
+        Bob.p=int(lines[i])
+        Bob.q=int(lines[i+1])
+        i+=3
+    Bob_data.close() 
+    Bob.e=cf.generate_e( (Bob.p-1) * (Bob.q-1))
+    e= Bob.e
+    #Sender: Alice
+    Alice.set_public_key( Bob.p, Bob.q , Bob.e)
+    cipher_text = Alice.encrypt(msg)
+    C=cf.ConvertToInt(cipher_text)
 
+    #write data in file that attacker will intercept
+    with open(attack_tests+ '.txt', 'w') as f:
+        f.write(str(C)+ "\n")
+        f.write(str(Bob.e) + "\n")
+        f.write(str(Bob.p*Bob.q))
+    f.close()    
+
+
+    
+
+
+#-------------------- Takes input from user -------------------
 msg=input("Enter message: ")
 type= input("For MA press 1, For CCA press 2: ")
 
-# Alice to Bob: M ====> C
-#interested in finding M given C,e,n
-# Eve intercepts C 
-# Bob (receiver) decryption
+
+#-------------------- Generate e,n,C for the attacks ------------
 Bob= r.Receiver()
-Bob_data = open("pq.txt", "r")
-lines = Bob_data.read().splitlines()
-i =0
-while i < len(lines)-1:
-    Bob.p=int(lines[i])
-    Bob.q=int(lines[i+1])
-    i+=3
-Bob_data.close() 
-Bob.e=cf.generate_e( (Bob.p-1) * (Bob.q-1))
-e= Bob.e
-#Sender: Alice
 Alice = s.Sender()
-Alice.set_public_key( Bob.p, Bob.q , Bob.e)
-cipher_text = Alice.encrypt(msg)
-C=cf.ConvertToInt(cipher_text)
 
-#write data in file that attacker will intercept
-with open('attack_test.txt', 'w') as f:
-    f.write(str(C)+ "\n")
-    f.write(str(Bob.e) + "\n")
-    f.write(str(Bob.p*Bob.q))
-f.close()    
+tests_txt("pq","attacks_test")
 
-
-attacker_data = open("attack_test.txt", "r")
+attacker_data = open('attacks_test.txt', "r")
 lines = attacker_data.read().splitlines()
 i =0
 while i < len(lines)-1:
@@ -70,6 +76,7 @@ while i < len(lines)-1:
     n=int(lines[i+2])
     i+=4
 attacker_data.close()
+
 
 #---------------------------- Mathematical Attack --------------  
 if (type == "1"):
