@@ -115,52 +115,40 @@ if time_or_test=="1":
 #---------------------------- Plotting -------------------------------
 
 elif time_or_test== "2": 
+    attack=input("Keylength vs Time, Choose 1 for MA, 2 for CCA: ")
     key_lengths=[]
     time_to_attack=[]
-
-    def tests_txt(pq_file,attack_tests):
-        Bob_data = open(pq_file+".txt", "r")
-        lines = Bob_data.read().splitlines()
-        i=0
-        p_list=[]
-        q_list=[]
-        C_list=[]
-        e_list=[]
-        while i < len(lines)-2:
-            p_list.append(int(lines[i]))
-            q_list.append(int(lines[i+1]))
-            i+=3
-        
-        Bob_data.close() 
-        for j in range(len(p_list)):
-            e_list.append(cf.generate_e( (p_list[j]-1) * (q_list[j]-1)))
-            #Sender: Alice
-            Alice.set_public_key( p_list[j], q_list[j] , e_list[j])
-            cipher_text = Alice.encrypt(msg)
-            C_list.append(cf.ConvertToInt(cipher_text)) 
-        #write data in file that attacker will intercept
-        with open(attack_tests+ '.txt', 'w') as f:
-            for k in range(len(C_list)):
-                f.write(str(C_list[k])+ "\n")
-                f.write(str(e_list[k]) + "\n")
-                f.write(str(p_list[k]*q_list[k])+"\n")
-                f.write("\n")
-        f.close()    
-
-
-
-    attack=input("Keylength vs Time, Choose 1 for MA, 2 for CCA: ")
     Alice = s.Sender()
     Bob=r.Receiver()
-    tests_txt("pq_attacks","cne_attacks") # generate c,n,e for different lengths 
 
-    attacker_data = open('cne_attacks.txt', "r")
-    lines = attacker_data.read().splitlines()
-    i =0
-    while i < len(lines)-1:
-        C=int(lines[i])
-        e=int(lines[i+1])
-        n=int(lines[i+2])
+    # def tests_txt(pq_file,attack_tests):
+    Bob_data = open("pq_attacks.txt", "r")
+    lines = Bob_data.read().splitlines()
+    i=0
+    k=0
+    # p_list=[]
+    # q_list=[]
+    C_list=[]
+    e_list=[]
+    n_list=[]
+    while i < len(lines)-2:
+        Bob.p=int(lines[i])
+        Bob.q=int(lines[i+1])
+
+        Bob.e=cf.generate_e( (Bob.p-1) * (Bob.q-1))
+        e= Bob.e
+        #Sender: Alice
+        Alice.set_public_key( Bob.p, Bob.q , Bob.e)
+        cipher_text = Alice.encrypt(msg)
+        C=cf.ConvertToInt(cipher_text)
+
+        e=Bob.e
+        n=Bob.p*Bob.q 
+        #----------------- to only save results in a txt file 
+        C_list.append(C)
+        e_list.append(e)
+        n_list.append(e)
+        #--------------------------------------------
         key_lengths.append(len(bin(n).replace("0b", "")))
 
         start_time=time.time()
@@ -172,8 +160,18 @@ elif time_or_test== "2":
         end_time=time.time()
         time_to_attack.append( end_time - start_time)
 
-        i+=4
-    attacker_data.close()
+        i+=3
+    
+    Bob_data.close() 
+
+
+    with open( 'cne_attacks.txt', 'w') as f:
+        for k in range(len(C_list)):
+            f.write(str(C_list[k])+ "\n")
+            f.write(str(e_list[k]) + "\n")
+            f.write(str(n_list[k])+"\n")
+            f.write("\n")
+    f.close()  
 
 
     plt.plot(key_lengths,time_to_attack )
