@@ -121,13 +121,9 @@ elif time_or_test== "2":
     Alice = s.Sender()
     Bob=r.Receiver()
 
-    # def tests_txt(pq_file,attack_tests):
     Bob_data = open("pq_attacks.txt", "r")
     lines = Bob_data.read().splitlines()
     i=0
-    k=0
-    # p_list=[]
-    # q_list=[]
     C_list=[]
     e_list=[]
     n_list=[]
@@ -144,11 +140,7 @@ elif time_or_test== "2":
 
         e=Bob.e
         n=Bob.p*Bob.q 
-        #----------------- to only save results in a txt file 
-        C_list.append(C)
-        e_list.append(e)
-        n_list.append(e)
-        #--------------------------------------------
+
         key_lengths.append(len(bin(n).replace("0b", "")))
 
         start_time=time.time()
@@ -159,6 +151,12 @@ elif time_or_test== "2":
     
         end_time=time.time()
         time_to_attack.append( end_time - start_time)
+
+        #----------------- to only save results in a txt file 
+        C_list.append(C)
+        e_list.append(e)
+        n_list.append(n)
+        #--------------------------------------------
 
         i+=3
     
