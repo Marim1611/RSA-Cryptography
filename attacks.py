@@ -114,6 +114,19 @@ if time_or_test=="1":
 #---------------------------- Plotting -------------------------------
 
 elif time_or_test== "2": 
+
+
+    # -------------------- Generate p,q for n bits ---------------------
+    with open('keylengthVsTimeAttack.txt', 'w') as f:
+        for n in range(4,65,2):
+            p,q=cf.generate_pq(n)
+            f.write(str(p)+ "\n")
+            f.write(str(q) + "\n")
+            f.write("\n")
+    f.close()  
+
+    #---------------------------------------------------
+
     attack=input("Keylength vs Time, Choose 1 for MA, 2 for CCA: ")
     key_lengths=[]
     time_to_attack=[]
@@ -162,7 +175,7 @@ elif time_or_test== "2":
     Bob_data.close() 
 
 
-    with open( 'dataForAttacker.txt', 'w') as f:
+    with open('dataForAttacker.txt', 'w') as f:
         for k in range(len(C_list)):
             f.write(str(C_list[k])+ "\n")
             f.write(str(e_list[k]) + "\n")
@@ -183,4 +196,3 @@ elif time_or_test== "2":
 
 else: 
     print("Please choose 1 or 2")
-    

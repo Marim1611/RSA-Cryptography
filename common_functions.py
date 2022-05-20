@@ -86,3 +86,14 @@ def generate_e(phi_n):
        e = random.randint(1,phi_n)
     return e   
 
+
+def generate_pq(n):
+    p=random.getrandbits(int(n/2))
+    q=random.getrandbits(int(n/2))
+    while not isPrime(p):
+        p=random.getrandbits(int(n/2))
+    while not isPrime(q) or p==q:
+        q=random.getrandbits(int(n/2))
+    return p,q
+
+    
