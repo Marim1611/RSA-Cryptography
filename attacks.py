@@ -19,24 +19,23 @@ def MA(C, n, e):
 
 #--------------------------------- CCA ------------------------
 
-def CCA(C, n, e):
-    
-    #intercepted cipher text
-    # generate r that is co-prime with el n
+def CCA (C,n,e):
+    # M => C
+    # generate r that is co-prime with n
     r = cf.generate_e(n) 
+    # compute C dash that will be sent to Bob using cipher text of the required msg
     C_dash=C* cf.PowMod( r,e,n)
-    # Bob decrypt C dash 
+    # Bob decrypts C dash and sends it back to Eve
     Y = cf.ConvertToInt( Bob.decrypt( cf.ConvertToStr( C_dash)))
+    #Now, Eve can get the message:
     M= cf.PowMod( (Y* cf.modInverse(r,n)),1,n)
     recovered= cf.ConvertToStr(M)
-
     return recovered
-
-
+ 
     
 #-------------------- Takes input from user -------------------
 msg=input("Enter message: ")
-time_or_test= input("To test attacks press 1, to test the keylength vs time press 2: ")
+time_or_test= input("To test attacks press 1, to test the key length vs time press 2: ")
 
 if time_or_test=="1": 
     type= input("For MA press 1, For CCA press 2: ")
