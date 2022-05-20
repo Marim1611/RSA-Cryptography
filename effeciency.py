@@ -31,12 +31,13 @@ while i < len(lines)-1:
     encryption_time.append( end_time - start_time)
 test_file.close() # close the file   
 print(encryption_time)
+print(key_lengths)
 # plotting the key length VS encryption time (efficiency)
 plt.plot(key_lengths,encryption_time )
-plt.xlabel('encryption time')
-plt.ylabel('key length in bits')
+plt.xlabel('key length in bits')
+plt.ylabel('encryption time')
 # # giving a title to my graph
-plt.title('RSA')
+plt.title('RSA efficiency')
 plt.show()
     
 
