@@ -121,7 +121,7 @@ elif time_or_test== "2":
     Alice = s.Sender()
     Bob=r.Receiver()
 
-    Bob_data = open("pq_attacks.txt", "r")
+    Bob_data = open("keylengthVsTimeAttack.txt", "r")
     lines = Bob_data.read().splitlines()
     i=0
     C_list=[]
@@ -163,7 +163,7 @@ elif time_or_test== "2":
     Bob_data.close() 
 
 
-    with open( 'cne_attacks.txt', 'w') as f:
+    with open( 'dataForAttacker.txt', 'w') as f:
         for k in range(len(C_list)):
             f.write(str(C_list[k])+ "\n")
             f.write(str(e_list[k]) + "\n")
