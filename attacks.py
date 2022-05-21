@@ -44,7 +44,7 @@ if time_or_test=="1":
     #-------------------- Generate e,n,C for the attacks ------------
     Bob= r.Receiver()
     Alice = s.Sender()
-    Bob_data = open("pq.txt", "r")
+    Bob_data = open("bob_data.txt", "r")
     lines = Bob_data.read().splitlines()
     i =0
     while i < len(lines)-1 :
@@ -118,7 +118,7 @@ elif time_or_test== "2":
 
     # -------------------- Generate p,q for n bits ---------------------
     with open('keylengthVsTimeAttack.txt', 'w') as f:
-        for n in range(4,65,2):
+        for n in range(8,65,2):
             p,q=cf.generate_pq(n)
             f.write(str(p)+ "\n")
             f.write(str(q) + "\n")
@@ -181,12 +181,15 @@ elif time_or_test== "2":
     f.close()  
 
 
-    plt.plot(key_lengths,time_to_attack )
-    plt.xlabel('Attack time')
-    plt.ylabel('key length in bits')
+    # plt.plot(time_to_attack,key_lengths,linewidth=2.0)
+    # plt.xlabel('Attack time')
+    # plt.ylabel('key length in bits')
 
-    plt.title('MA Attack ')
+    # plt.title('MA Attack ')
    
+    fig,ax=plt.subplots()
+    ax.set_xticklabels(n_list)
+    ax.plot(key_lengths,time_to_attack,linewidth=2.0)
     plt.show()
 
 else: 
