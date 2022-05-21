@@ -114,7 +114,19 @@ if time_or_test=="1":
 #---------------------------- Plotting -------------------------------
 
 elif time_or_test== "2": 
-    attack=input("Keylength vs Time, Choose 1 for MA, 2 for CCA: ")
+
+
+    # -------------------- Generate p,q for n bits ---------------------
+    with open('keylengthVsTimeAttack.txt', 'w') as f:
+        for n in range(4,65,2):
+            p,q=cf.generate_pq(n)
+            f.write(str(p)+ "\n")
+            f.write(str(q) + "\n")
+            f.write("\n")
+    f.close()  
+
+    #---------------------------------------------------
+
     key_lengths=[]
     time_to_attack=[]
     Alice = s.Sender()
@@ -143,10 +155,8 @@ elif time_or_test== "2":
         key_lengths.append(len(bin(n).replace("0b", "")))
 
         start_time=time.time()
-        if attack=="1":
-            recovered= MA(C, n, e)
-        elif attack=="2": 
-            recovered= CCA(C, n, e)
+
+        recovered= MA(C, n, e)
     
         end_time=time.time()
         time_to_attack.append( end_time - start_time)
@@ -162,7 +172,7 @@ elif time_or_test== "2":
     Bob_data.close() 
 
 
-    with open( 'dataForAttacker.txt', 'w') as f:
+    with open('dataForAttacker.txt', 'w') as f:
         for k in range(len(C_list)):
             f.write(str(C_list[k])+ "\n")
             f.write(str(e_list[k]) + "\n")
@@ -175,12 +185,9 @@ elif time_or_test== "2":
     plt.xlabel('Attack time')
     plt.ylabel('key length in bits')
 
-    if attack== "1":
-        plt.title('MA Attack ')
-    else: 
-        plt.title('CCA Attack ')
+    plt.title('MA Attack ')
+   
     plt.show()
 
 else: 
     print("Please choose 1 or 2")
-    

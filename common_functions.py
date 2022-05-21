@@ -87,12 +87,7 @@ def generate_e(phi_n):
     while not areCoprime(e, phi_n):
        e = random.randint(1,phi_n)
     return e   
-def msg_length_available(n ,msg):
-    allowed_length=n // 256
-    if allowed_length == len(msg):
-        return 1
-    else:
-        return 0    
+
 def is_key_enough(n ,msg):
     max_allowed_length= 0
     while n != 0:
@@ -105,3 +100,12 @@ def is_key_enough(n ,msg):
         return True , max_allowed_length
     else:
         return False ,max_allowed_length
+
+def generate_pq(n):
+    p=random.getrandbits(int(n/2))
+    q=random.getrandbits(int(n/2))
+    while not isPrime(p):
+        p=random.getrandbits(int(n/2))
+    while not isPrime(q) or p==q:
+        q=random.getrandbits(int(n/2))
+    return p,q
