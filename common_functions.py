@@ -48,19 +48,19 @@ def power_mod_solve(x, y, n):
         return b * x % n 
 
 def isPrime(n):
-    if n == 1 or n == 4:
-        return False
-    elif n == 2 or n == 3:
-        return True
+    # if n == 1:
+    #     return False
 
-    for i in range(10000):
-        a = random.randint(2, n - 2)
+    # test=10000
+    # if test>=n:
+    #     test=n-1
+    # for i in range(test):
+    #     a = random.randint(1, n-1 )
+    #     if power_mod_solve(a, n - 1, n) != 1:
+    #         return False
+    # return True
 
-        if power_mod_solve(a, n - 1, n) != 1:
-            return False
-    return True
-
-    # return sympy.isprime(n)
+    return sympy.isprime(n)
 
 
 def extended_euclidean_algo(a, b):

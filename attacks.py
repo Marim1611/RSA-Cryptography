@@ -126,8 +126,12 @@ if time_or_test=="1":
 #---------------------------- Plotting -------------------------------
 
 elif time_or_test== "2": 
-    msg='m'
-   
+    test_file = open("graphs_msg.txt", "r")
+    lines = test_file.read().splitlines()
+    msg=lines[0]
+    test_file.close() # close the file  
+
+
     # -------------------- Generate p,q for n bits ---------------------
     with open('keylengthVsTimeAttack.txt', 'w') as f:
         for n in range(8,65,2):
