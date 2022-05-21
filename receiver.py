@@ -21,7 +21,10 @@ while i < len(lines)-1:
     i+=3
 test_file.close() # close the file   
         
-#check that p and q are primes
+
+print("Validate p,q.... \n")
+ 
+# check that p and q are primes
 if not cf.isPrime(p):
     print(" p must be prime")
     exit()
