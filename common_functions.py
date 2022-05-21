@@ -1,23 +1,23 @@
 import random
 
 from numpy import true_divide
-def listToString(s): 
-        # initialize an empty string
-        str1 = "" 
+def listToString(L): 
+        text = "" 
         # traverse in the string  
-        for ele in s: 
-            str1 += ele  
+        for char in L: 
+            text += char  
         # return string  
-        return str1 
-# Python program to check if given number is prime or not
+        return text 
 def isPrime(n): 
     return n > 1 and all(n % i for i in range(2, int(n ** 0.5) + 1))
-def gcd(a, b):
-    if b == 0:
-        return a
-    return gcd(b, a%b)    
-def areCoprime(a, b):  
-    if (gcd(a, b) == 1):
+def gcd(A, B):
+    #base case
+    if B == 0:
+        return A
+    #recursive till b equals to 0    
+    return gcd(B, A%B)    
+def are_coprimes(A, B):  
+    if (gcd(A, B) == 1):
         return True
     else:
         return False    
@@ -32,40 +32,43 @@ def ConvertToInt(message_str):
     for i in range(len(message_str)):
         res = res * 256 + ord(message_str[i])
     return res
-def PowMod(a, n, mod):
-    if n == 0:
-        return 1 % mod
-    elif n == 1:
-        return a % mod
+# x^y mod n
+def power_mod_solve(x, y, n):
+    if y == 0:
+        return 1 % n
+    elif y == 1:
+        return x % n
     else:
-        b = PowMod(a, n // 2, mod)
-        b = b * b % mod
-    if n % 2 == 0:
+        b = power_mod_solve(x, y // 2, n)
+        b = b * b % n
+    if y % 2 == 0:
         return b
     else:
-        return b * a % mod 
+        return b * x % n 
 
-def ExtendedEuclid(a, b):
+def extended_euclidean_algo(a, b):
     if b == 0:
         return (1, 0)
-    (x, y) = ExtendedEuclid(b, a % b)
+    (x, y) = extended_euclidean_algo(b, a % b)
     k = a // b
     return (y, x - k * y)
-               
-def modInverse(a, n):
-    (b, x) = ExtendedEuclid(a, n)
+# b = a^-1 mod n              
+def mod_inverse_solve(a, n):
+    (b, x) = extended_euclidean_algo(a, n)
     if b < 0:
-        b = (b % n + n) % n # we don't want -ve integers
+        b = (b % n + n) % n # get rid of -ve numbers
     return b   
 
 def generate_e(phi_n): 
+    # generate e such that it is co-prime with phi n
     e = random.randint(1,phi_n) 
-    while not areCoprime(e, phi_n):
+    while not are_coprimes(e, phi_n):
        e = random.randint(1,phi_n)
     return e   
 
 def is_key_enough(n ,msg):
     max_allowed_length= 0
+    # char is 8 bits (1 byte) so 2^8 =  256 to know how many char we can encrypt using certain key
     while n != 0:
         n= n //256
         max_allowed_length +=1    

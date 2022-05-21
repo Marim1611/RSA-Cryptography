@@ -24,11 +24,14 @@ def CCA (C,n,e):
     # generate r that is co-prime with n
     r = cf.generate_e(n) 
     # compute C dash that will be sent to Bob using cipher text of the required msg
-    C_dash=C* cf.PowMod( r,e,n)
+    # C` = C r^e mod n
+    C_dash=C* cf.power_mod_solve( r,e,n)
     # Bob decrypts C dash and sends it back to Eve
+    # Y = (C * r^e)^ d mod n
     Y = cf.ConvertToInt( Bob.decrypt( cf.ConvertToStr( C_dash)))
-    #Now, Eve can get the message:
-    M= cf.PowMod( (Y* cf.modInverse(r,n)),1,n)
+    #Now, Eve can get the message: Y = (M^e * r^e)^d mod n => as d = e^-1 mod n 
+    # so Y= M * r mod n =>  M = Y *(r^-1) mod n so it's very easy to obtain messages 
+    M= cf.power_mod_solve( (Y* cf.mod_inverse_solve(r,n)),1,n)
     recovered= cf.ConvertToStr(M)
     return recovered
  

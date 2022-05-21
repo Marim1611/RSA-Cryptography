@@ -14,6 +14,6 @@ class Sender:
     def encrypt(self,message):
         # the msg a number to apply RSA encryption
         M=cf.ConvertToInt(message) 
-        C=cf.PowMod(M, self.e , self.p * self.q)
+        C=cf.power_mod_solve(M, self.e , self.p * self.q)
         cipher_text=cf.ConvertToStr(C)
         return cipher_text
