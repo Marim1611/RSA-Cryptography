@@ -11,34 +11,24 @@ my_receiver= receiverClass.Receiver()
 test_file = open("test_cases.txt", "r")
 lines = test_file.read().splitlines()
 i =0
-e=""
 while i < len(lines)-1:
     # read the message and the public key
     p=int(lines[i])
     q=int(lines[i+1])
-    if ((i+2) <= (len(lines)-1)):
-        e=lines[i+2]
     i+=3
 test_file.close() # close the file   
 
-#check that p and q are primes
-if not(cf.isPrime(p) and cf.isPrime(q)):
-        print(" p and q must be primes")
-        exit()
-else:
-    print("correct primes")      
-    
 #generate public key e if not given  
-if e == "" or e == " ":
-   print("e is not  given")
-   e= cf.generate_e( (p-1) * (q-1))
-else:
-    print("e is given")
-    if not (cf.areCoprime(int(e), (p-1)*(q-1)) ):
-        print("incorrect e, should be prime with phi of n!")
-        exit()
-    else:
-        e=int(e)   
+# if e == "" or e == " ":
+#    print("e is not  given")
+e= cf.generate_e( (p-1) * (q-1))
+
+
+        
+# check that p and q are primes
+    # if not(cf.isPrime(p) and cf.isPrime(q)):
+    #     print(" p and q must be primes")
+    #     exit()
   
 #set values of the public key
 my_receiver.p=p
