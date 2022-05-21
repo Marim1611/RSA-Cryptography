@@ -7,39 +7,15 @@ def listToString(s):
         # traverse in the string  
         for ele in s: 
             str1 += ele  
-        
         # return string  
         return str1 
 # Python program to check if given number is prime or not
-def isPrime(n):     return n > 1 and all(n % i for i in range(2, int(n ** 0.5) + 1))
-# def isPrime(num):  
-#     # If given number is greater than 1
-#     if num > 1:
-#         # Iterate from 2 to n / 2
-#         for i in range(2, int(num**0.5)+1):
-
-#             # If num is divisible by any number between
-#             # 2 and n / 2, it is not prime
-#             if (num % i) == 0:
-#                 return False
-#                 break
-#         else:
-#             return True
-
-#     else:
-#         return False
+def isPrime(n): 
+    return n > 1 and all(n % i for i in range(2, int(n ** 0.5) + 1))
 def gcd(a, b):
     if b == 0:
         return a
     return gcd(b, a%b)    
-    # if (a == 0 or b == 0): return 0
-    # # base case
-    # if (a == b): return a
-    # # a is greater
-    # if (a > b):
-    #     return gcd(a % b, b)         
-    # return gcd(a, b % a)
-# two numbers are co-prime or not
 def areCoprime(a, b):  
     if (gcd(a, b) == 1):
         return True
@@ -92,10 +68,7 @@ def is_key_enough(n ,msg):
     max_allowed_length= 0
     while n != 0:
         n= n //256
-        max_allowed_length +=1
-    print("key length")
-    print(len(msg))
-    print(max_allowed_length)    
+        max_allowed_length +=1    
     if len(msg) < max_allowed_length:
         return True , max_allowed_length
     else:
