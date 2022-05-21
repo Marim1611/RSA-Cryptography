@@ -33,5 +33,10 @@ my_sender.set_public_key(p,q,e)
 
 while True:
     message=input("-> ")
+    allowed,max=cf.is_key_enough(p*q ,message)
+    while not allowed:
+        print("~~max allowed length of message is only ",max-1 )
+        message=input("-> ")
+        allowed,max=cf.is_key_enough(p*q ,message)
     cipher_text= my_sender.encrypt(message)
     s.send(cipher_text.encode())     

@@ -1,4 +1,6 @@
 import random
+
+from numpy import true_divide
 def listToString(s): 
         # initialize an empty string
         str1 = "" 
@@ -81,8 +83,25 @@ def modInverse(a, n):
     return b   
 
 def generate_e(phi_n): 
-    e = random.randint(1,phi_n)  
+    e = random.randint(1,phi_n) 
     while not areCoprime(e, phi_n):
        e = random.randint(1,phi_n)
     return e   
-
+def msg_length_available(n ,msg):
+    allowed_length=n // 256
+    if allowed_length == len(msg):
+        return 1
+    else:
+        return 0    
+def is_key_enough(n ,msg):
+    max_allowed_length= 0
+    while n != 0:
+        n= n //256
+        max_allowed_length +=1
+    print("key length")
+    print(len(msg))
+    print(max_allowed_length)    
+    if len(msg) < max_allowed_length:
+        return True , max_allowed_length
+    else:
+        return False ,max_allowed_length
