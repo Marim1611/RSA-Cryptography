@@ -36,10 +36,10 @@ def CCA (C,n,e):
     return recovered
  
     
-#-------------------- Takes input from user -------------------
-msg=input("Enter message: ")
-time_or_test= input("To test attacks press 1, to test the key length vs time press 2: ")
 
+time_or_test= input("To test attacks press 1, to test the key length vs time press 2: ")
+p=0
+q=0
 if time_or_test=="1": 
     type= input("For MA press 1, For CCA press 2: ")
 
@@ -57,6 +57,15 @@ if time_or_test=="1":
     Bob_data.close() 
     Bob.e=cf.generate_e( (Bob.p-1) * (Bob.q-1))
     e= Bob.e
+    p=Bob.p
+    q=Bob.q
+    #-------------------- Takes msg from user in the allowed range -------------------
+    msg=input("Enter message: ")
+    allowed,max=cf.is_key_enough(Bob.p*Bob.q ,msg)
+    while not allowed:
+        print("~~max allowed length of message is only ",max-1 )
+        msg=input("Enter message: ")
+        allowed,max=cf.is_key_enough(Bob.p*Bob.q ,msg)
     #Sender: Alice
     Alice.set_public_key( Bob.p, Bob.q , Bob.e)
     cipher_text = Alice.encrypt(msg)
@@ -118,6 +127,13 @@ if time_or_test=="1":
 
 elif time_or_test== "2": 
 
+    #-------------------- Takes msg from user in the allowed range -------------------
+    msg=input("Enter message: ")
+    # allowed,max=cf.is_key_enough(Bob.p*Bob.q ,msg)
+    # while not allowed:
+    #     print("~~max allowed length of message is only ",max-1 )
+    #     msg=input("Enter message: ")
+    #     allowed,max=cf.is_key_enough(Bob.p*Bob.q ,msg)
 
     # -------------------- Generate p,q for n bits ---------------------
     with open('keylengthVsTimeAttack.txt', 'w') as f:
