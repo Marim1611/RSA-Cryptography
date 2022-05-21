@@ -58,6 +58,7 @@ def isPrime(n):
 
         if power_mod_solve(a, n - 1, n) != 1:
             return False
+    return True
 
     # return sympy.isprime(n)
 
