@@ -126,15 +126,8 @@ if time_or_test=="1":
 #---------------------------- Plotting -------------------------------
 
 elif time_or_test== "2": 
-
-    #-------------------- Takes msg from user in the allowed range -------------------
-    msg=input("Enter message: ")
-    # allowed,max=cf.is_key_enough(Bob.p*Bob.q ,msg)
-    # while not allowed:
-    #     print("~~max allowed length of message is only ",max-1 )
-    #     msg=input("Enter message: ")
-    #     allowed,max=cf.is_key_enough(Bob.p*Bob.q ,msg)
-
+    msg='m'
+   
     # -------------------- Generate p,q for n bits ---------------------
     with open('keylengthVsTimeAttack.txt', 'w') as f:
         for n in range(8,65,2):
