@@ -8,12 +8,12 @@ theSender= s.Sender()
 key_lengths=[]
 encryption_time=[]
 # read message to be encrypted
-test_file = open("eff_msg.txt", "r")
+test_file = open("graphs_msg.txt", "r")
 lines = test_file.read().splitlines()
 message=lines[0]
 test_file.close() # close the file  
 # read Os & Qs being used to plot the graph     
-test_file = open("P_Q.txt", "r")
+test_file = open("efficiencyPQ.txt", "r")
 lines = test_file.read().splitlines()
 i =0
 while i < len(lines)-1:

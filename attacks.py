@@ -199,6 +199,9 @@ elif time_or_test== "2":
     fig,ax=plt.subplots()
     ax.set_xticklabels(n_list)
     ax.plot(key_lengths,time_to_attack,linewidth=2.0)
+    ax.set_title("Key length vs Time to attack")
+    ax.set_xlabel("Key value")
+    ax.set_ylabel("Time to attack")
     plt.show()
 
 else: 
