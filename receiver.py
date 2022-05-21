@@ -26,10 +26,14 @@ e= cf.generate_e( (p-1) * (q-1))
 
         
 # check that p and q are primes
-    # if not(cf.isPrime(p) and cf.isPrime(q)):
-    #     print(" p and q must be primes")
-    #     exit()
-  
+if not cf.isPrime(p):
+    print(" p must be prime")
+    exit()
+
+if not cf.isPrime(q):
+    print(" q must be prime")
+    exit()
+    
 #set values of the public key
 my_receiver.p=p
 my_receiver.q=q

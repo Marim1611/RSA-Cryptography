@@ -46,6 +46,21 @@ def power_mod_solve(x, y, n):
     else:
         return b * x % n 
 
+def isPrime(n):
+    if n == 1 or n == 4:
+        return False
+    elif n == 2 or n == 3:
+        return True
+
+    for i in range(10000):
+        a = random.randint(2, n - 2)
+
+        if power_mod_solve(a, n - 1, n) != 1:
+            return False
+
+    return True
+
+
 def extended_euclidean_algo(a, b):
     if b == 0:
         return (1, 0)

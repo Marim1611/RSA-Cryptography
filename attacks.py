@@ -197,14 +197,7 @@ elif time_or_test== "2":
             f.write(str(e_list[k]) + "\n")
             f.write(str(n_list[k])+"\n")
             f.write("\n")
-    f.close()  
-
-
-    # plt.plot(time_to_attack,key_lengths,linewidth=2.0)
-    # plt.xlabel('Attack time')
-    # plt.ylabel('key length in bits')
-
-    # plt.title('MA Attack ')
+    f.close() 
    
     fig,ax=plt.subplots()
     ax.set_xticklabels(n_list)
