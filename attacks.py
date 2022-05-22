@@ -8,13 +8,14 @@ import matplotlib.pyplot as plt
 def MA(C, n, e):
     recovered = ''
     Eve = r.Receiver()
-    for p in range(2, int((n**0.5)+1)):
+    for p in range(2, int((n**0.5)+1)): # since n is composite then one of its factors is <=sqrt(n)
         if n % p == 0:
             Eve.q = n//p
             Eve.e = e
             Eve.p = p
-            recovered = Eve.decrypt(cf.ConvertToStr(C))
-
+            break
+        
+    recovered = Eve.decrypt(cf.ConvertToStr(C))
     return recovered
 
 #--------------------------------- CCA ------------------------
