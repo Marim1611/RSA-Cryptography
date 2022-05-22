@@ -18,7 +18,7 @@ run attacks.py
 # Sender   ..... Receiver
 ![image](https://user-images.githubusercontent.com/76243256/169686186-6d1c6fe0-5489-4f25-9a5b-ca6b3d19b6b1.png)
 
-# Efficiency: encyption time VS key length
+# Efficiency: encryption time VS key length
 ![image](https://user-images.githubusercontent.com/76243256/169686214-c4d907b1-6dd6-4a6f-a0f1-b5ab5dbce5c3.png)
 
 # key value VS MA attack time
