@@ -9,8 +9,7 @@ def listToString(L):
             text += char  
         # return string  
         return text 
-def isPrime(n): 
-    return n > 1 and all(n % i for i in range(2, int(n ** 0.5) + 1))
+
 def gcd(A, B):
     #base case
     if B == 0:
@@ -48,18 +47,6 @@ def power_mod_solve(x, y, n):
         return b * x % n 
 
 def isPrime(n):
-    # if n == 1:
-    #     return False
-
-    # test=10000
-    # if test>=n:
-    #     test=n-1
-    # for i in range(test):
-    #     a = random.randint(1, n-1 )
-    #     if power_mod_solve(a, n - 1, n) != 1:
-    #         return False
-    # return True
-
     return sympy.isprime(n)
 
 

@@ -38,6 +38,10 @@ if e == "" or e == " ":
    e= cf.generate_e( (p-1) * (q-1))
 else:
     e=int(e)
+    if not (cf.are_coprimes( e,(p-1) * (q-1) )):
+        print("e must be co-prime with phi(n)")
+        exit()
+
 
 #set values of the public key
 my_receiver.p=p
