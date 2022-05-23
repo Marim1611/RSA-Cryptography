@@ -89,3 +89,8 @@ def generate_pq(n):
     while not isPrime(q) or p==q:
         q=random.getrandbits(int(n/2))
     return p,q
+def validate_e(e ,phi):
+    if are_coprimes(e, phi) and e < phi and e > 1:
+        return 1
+    else:
+        return 0        
