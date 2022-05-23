@@ -14,9 +14,11 @@ i =0
 e=""
 while i < len(lines)-1:
     # read the message and the public key
-    p=int(lines[i])
-    q=int(lines[i+1])
-    if (i+2) < (len(lines)-1):
+    if lines[i] != "" or lines[i] != " ":  
+        p=int(lines[i])
+    if lines[i+1] != "" or lines[i] != " ":      
+        q=int(lines[i+1])
+    if (i+2) <= (len(lines)-1):
         e=lines[i+2]
     i+=3
 test_file.close() # close the file   
@@ -38,8 +40,8 @@ if e == "" or e == " ":
    e= cf.generate_e( (p-1) * (q-1))
 else:
     e=int(e)
-    if not (cf.are_coprimes( e,(p-1) * (q-1) )):
-        print("e must be co-prime with phi(n)")
+    if not (cf.validate_e( e,(p-1) * (q-1) )):
+        print("invalid e, e must be co-prime with phi(n), less than phi(n) and greater than 1 ")
         exit()
 
 
